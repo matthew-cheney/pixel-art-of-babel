@@ -17,7 +17,7 @@ array2 = image_from_seed(seed)
 from PIL import Image
 
 new_image = Image.fromarray(array1)
-new_image.save(f'00_{dest_filename}')
+new_image.save(f'{dest_filename}')
 
-new_image = Image.fromarray(array2)
-new_image.save(f'01_{dest_filename}')
+# new_image = Image.fromarray(array2)
+# new_image.save(f'01_{dest_filename}')

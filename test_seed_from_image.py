@@ -14,9 +14,9 @@ from PIL import Image
 im = Image.open(image_filename)
 
 seed1 = seed_from_image(im)
-seed2 = seed_from_image(im)
+# seed2 = seed_from_image(im)
 
-with open(f'00_{dest_filename}', 'w') as f:
+with open(f'{dest_filename}', 'w') as f:
     print(seed1, file=f, end='')
-with open(f'01_{dest_filename}', 'w') as f:
-    print(seed2, file=f, end='')
+# with open(f'01_{dest_filename}', 'w') as f:
+#     print(seed2, file=f, end='')
