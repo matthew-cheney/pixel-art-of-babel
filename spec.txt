@@ -1,0 +1,54 @@
+Pixel Art of Babel
+
+PAoB is modeled after the Library of Babel. The principle of generating every
+text possible is applied to images. PAoB is capable of generating any and every
+image consisting of 8 basic color values in a 64x64 image.
+
+8 possible cell RGB values:
+    [
+    (0,0,0),        # 0
+    (255,255,255),  # 1
+    (255,0,0),      # 2
+    (255,160,16),   # 3
+    (255,224,32),   # 4
+    (0,192,0),      # 5
+    (0,32,255),     # 6
+    (160,32,255),   # 7
+    ]
+
+For remainder of this specification, these values will be referred to by their
+indeces, given in # comments after each value above.
+
+The core of PAoB is the image generation class, ImageGenerator. This
+ImageGenerator has two main classes: 1) random_image, and 2) image_from_seed.
+
+- random_image
+    Take no arguments
+    Returns random 64x64 image, represented as numpy array.
+    Purely random, each cell has equal likelihood of being assigned each
+    pixel value.
+
+- image_from_seed
+    Takes 1 argument - seed, represented as 64-base string [a-zA-Z0-9] and -,_
+    Returns 64x64 image, represented as numpy array, corresponding to seed.
+    The seed is converted to a base 10 number. This corresponds to the i-th
+    possible image. Order or possible images is defined as:
+        Start with full array of 0 pixels. The first 16 images are generated
+        by incrementing [63][63] cell (bottom-right) by one. Once this value
+        reaches 7, the next image is obtained by setting cell [63][62] to 1,
+        then incrementing over cell [63][63] again. This pattern, like any
+        counting system, continues for every image.
+
+- seed_from_image
+    Takes 1 argument - image, represented as numpy array.
+    Returns 64-based seed, containing 2,048 characters.
+    If passed to image_from_seed, this seed would produce the exact same
+    image passed in to this function.
+
+Seed:
+    Seeds are represented with all lowercase and uppercase letters, digits 0
+    to 9, and dash and underscore. The defined order is:
+        0 - 9, then a - z, then A - Z, then -, then _
+
+    Seeds are 2,048 characters long. Any seed with fewer characters will be
+    front filled with 0s.
