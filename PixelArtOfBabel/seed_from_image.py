@@ -1,7 +1,14 @@
 from PixelArtOfBabel.dictionaries import rgb_to_index, indices_to_seed_char
+import numpy as np
 
+IMAGE_WIDTH = 64
+IMAGE_HEIGHT = 64
 
-def seed_from_image(image_array):
+def seed_from_image(image):
+
+    image.resize((IMAGE_WIDTH, IMAGE_HEIGHT))
+    image_array = np.array(image)
+
     row = 0
     col = 0
     seed = ''
